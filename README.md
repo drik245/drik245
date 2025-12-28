@@ -1,19 +1,3 @@
-<!-- Header Banner -->
-<div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Drik%20Paul&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=32&desc=Electronics%20%26%20Communication%20Engineer%20|%20Hardware%20Developer&descAlignY=51&descAlign=50"/>
-</div>
-
-
-<!-- Profile Views & Followers -->
-<div align="center">
-  <img src="https://komarev.com/ghpvc/?username=drik245&label=Profile%20Views&color=0e75b6&style=for-the-badge" alt="Profile Views" />
-  <a href="https://github.com/drik245?tab=followers">
-    <img src="https://img.shields.io/github/followers/drik245?label=Followers&style=for-the-badge&color=blue" alt="GitHub Followers"/>
-  </a>
-</div>
-
-<br/>
-
 <!-- About Me Section -->
 ## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30"> About Me
 
