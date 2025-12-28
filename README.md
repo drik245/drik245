@@ -4,21 +4,8 @@
 
 ```yaml
 Name: Drik Paul
-Location: Ghaziabad, Uttar Pradesh, India 🇮🇳
+Location: India
 Education: B.Tech ECE
-Role: Technical Head, Students Club
-
-Achievements:
-  - 🏆 SIH 2025 Finalist (Ranked 14/600)
-  - 🚀 IIT Roorkee E-Summit 2025 Participant
-  - 👥 Led multiple university outreach programs
-
-Current Focus:
-  - 🎹 FPGA Digital Synthesizer (Korg Minilogue XD Clone)
-  - 🌾 AgroSmart - Smart Irrigation System
-  - 🔐 BLE FIDO2 Encryption Device
-
-Fun Fact: I turn coffee ☕ into circuits! ⚡
 ```
 
 ---
