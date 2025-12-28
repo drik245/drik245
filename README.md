@@ -179,7 +179,5 @@ Fun Fact: I turn coffee ☕ into circuits! ⚡
 </div>
 
 <div align="center">
-  <b>⭐ From <a href="https://github.com/drik245">Drik Paul</a> with 💙</b>
-  <br/>
   <sub><i>"Engineering the future, one circuit at a time."</i></sub>
 </div>
