@@ -5,7 +5,7 @@
 ```yaml
 Name: Drik Paul
 Location: Ghaziabad, Uttar Pradesh, India 🇮🇳
-Education: B.Tech ECE @ Bennett University (2024-28)
+Education: B.Tech ECE
 Role: Technical Head, Students Club
 
 Achievements:
