@@ -186,17 +186,14 @@ Fun Fact: I turn coffee ☕ into circuits! ⚡
 
 <div align="center">
   
-<a href="mailto:drikpaul202@gmail.com">
-  <img src="https://img.shields.io/badge/Email-drikpaul202%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/>
+<a href="mailto:drik@tuta.io">
+  <img src="https://img.shields.io/badge/Email-drik%40tuta.io-EA4335?style=for-the-badge&logo=tutanota&logoColor=white"/>
 </a>
 <a href="https://github.com/drik245">
   <img src="https://img.shields.io/badge/GitHub-drik245-181717?style=for-the-badge&logo=github&logoColor=white"/>
 </a>
 <a href="https://linkedin.com/in/drikpaul">
   <img src="https://img.shields.io/badge/LinkedIn-Drik%20Paul-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
-</a>
-<a href="tel:+919868353997">
-  <img src="https://img.shields.io/badge/Phone-%2B91--9868353997-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/>
 </a>
 
 </div>
