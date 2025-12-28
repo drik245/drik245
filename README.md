@@ -92,21 +92,6 @@ Fun Fact: I turn coffee ☕ into circuits! ⚡
 
 <!-- Featured Projects -->
 ## <img src="https://media.giphy.com/media/WFZvB7VIXBgiz3oDXE/giphy.gif" width="30"> Featured Projects
-
-<div align="center">
-
-<a href="https://github.com/drik245/Verdant_SIH">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=drik245&repo=Verdant_SIH&theme=tokyonight&hide_border=true&border_radius=15" alt="AgroSmart"/>
-</a>
-<a href="https://github.com/drik245/FPGASoundSynth">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=drik245&repo=FPGASoundSynth&theme=tokyonight&hide_border=true&border_radius=15" alt="FPGA Synth"/>
-</a>
-<a href="https://github.com/drik245/ESP32_Spatial_Audio">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=drik245&repo=ESP32_Spatial_Audio&theme=tokyonight&hide_border=true&border_radius=15" alt="ESP32 Spatial Audio"/>
-</a>
-
-</div>
-
 ### 🚀 Project Highlights
 
 | Project | Description | Tech Stack | Status |
@@ -115,26 +100,6 @@ Fun Fact: I turn coffee ☕ into circuits! ⚡
 | 🎹 **FPGA Sound Synth** | Digital Synthesizer (Korg Minilogue XD Clone) | Verilog, Vivado, MATLAB, Simulink | 🔄 In Progress |
 | 🔐 **BLE Encryption** | FIDO2 protocol implementation with BLE & user presence | BLE, Embedded C | 🔄 In Progress |
 | 🔊 **ESP32 Spatial Audio** | 3D spatial audio processing on ESP32 | ESP32, C++, DSP | ✅ Complete |
-
----
-
-<!-- GitHub Stats -->
-## <img src="https://media.giphy.com/media/cj87CxfRtrUifF3Ryk/giphy.gif" width="25"> GitHub Stats
-
-<div align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=drik245&show_icons=true&theme=tokyonight&hide_border=true&border_radius=15&include_all_commits=true&count_private=true" alt="GitHub Stats"/>
-  <img width="49%" src="https://github-readme-streak-stats.herokuapp.com/?user=drik245&theme=tokyonight&hide_border=true&border_radius=15" alt="GitHub Streak"/>
-</div>
-
-<div align="center">
-  <img width="40%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=drik245&layout=compact&theme=tokyonight&hide_border=true&border_radius=15&langs_count=8" alt="Top Languages"/>
-</div>
-
-<!-- Activity Graph -->
-<div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=drik245&custom_title=Drik's%20Contribution%20Graph&theme=tokyo-night&hide_border=true&border_radius=15" alt="Activity Graph"/>
-</div>
-
 ---
 
 <!-- Achievements Section -->
