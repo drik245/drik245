@@ -3,12 +3,6 @@
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Drik%20Paul&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=32&desc=Electronics%20%26%20Communication%20Engineer%20|%20Hardware%20Developer&descAlignY=51&descAlign=50"/>
 </div>
 
-<!-- Typing Animation -->
-<div align="center">
-  <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=1000&color=6AD3F7&center=true&vCenter=true&multiline=true&repeat=true&random=false&width=600&height=100&lines=🎓+ECE+Student+%40+Bennett+University;⚡+FPGA+%7C+ESP32+%7C+Embedded+Systems;🏆+SIH'25+Finalist+(Top+14%2F600);🔧+Building+Tomorrow's+Hardware%2C+Today" alt="Typing SVG" />
-  </a>
-</div>
 
 <!-- Profile Views & Followers -->
 <div align="center">
@@ -23,7 +17,6 @@
 <!-- About Me Section -->
 ## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30"> About Me
 
-<img align="right" alt="Coding" width="320" src="https://cdn.dribbble.com/users/1162077/screenshots/3848914/programmer.gif"/>
 
 ```yaml
 Name: Drik Paul
@@ -43,8 +36,6 @@ Current Focus:
 
 Fun Fact: I turn coffee ☕ into circuits! ⚡
 ```
-
-<br clear="right"/>
 
 ---
 
