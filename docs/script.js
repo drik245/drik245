@@ -405,205 +405,219 @@ class ParallaxOrbs {
 
 // ==========================================
 // HERO PHOTO DUST DISSOLVE ON SCROLL
+// True image disintegration effect
 // ==========================================
 
 class HeroPhotoDissolve {
     constructor() {
         this.photoContainer = document.querySelector('.hero-photo-container');
         this.photoWrapper = document.querySelector('.hero-photo-wrapper');
-        this.dustOverlay = document.getElementById('photoDust');
+        this.heroPhoto = document.querySelector('.hero-photo');
         this.particles = [];
-        this.isDissolving = false;
-        this.scrollThreshold = 100;
+        this.scrollThreshold = 50;
+        this.maxScroll = 400;
         this.canvas = null;
+        this.lastProgress = 0;
+        this.imageLoaded = false;
+        this.tileSize = 4; // Size of each particle tile (smaller = more particles)
 
-        if (this.photoContainer) {
+        if (this.photoContainer && this.heroPhoto) {
             this.init();
         }
     }
 
     init() {
-        // Create canvas for dust particles
-        this.createDustCanvas();
+        // Wait for image to load before sampling pixels
+        if (this.heroPhoto.complete) {
+            this.setupEffect();
+        } else {
+            this.heroPhoto.addEventListener('load', () => this.setupEffect());
+        }
+    }
 
-        // Listen for scroll events
-        window.addEventListener('scroll', () => this.handleScroll());
+    setupEffect() {
+        // Create canvas for particles
+        this.createCanvas();
 
-        // Initial check
+        // Sample the image and create particles from actual pixels
+        this.sampleImageAndCreateParticles();
+
+        // Listen for scroll
+        window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
+
+        // Start animation
+        this.animate();
         this.handleScroll();
     }
 
-    createDustCanvas() {
+    createCanvas() {
         this.canvas = document.createElement('canvas');
         this.canvas.classList.add('dust-canvas');
         this.canvas.style.cssText = `
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: -200px;
+            left: -200px;
+            width: calc(100% + 400px);
+            height: calc(100% + 400px);
             pointer-events: none;
             z-index: 10;
         `;
-        this.photoContainer.appendChild(this.canvas);
+        this.photoWrapper.appendChild(this.canvas);
         this.ctx = this.canvas.getContext('2d');
-        this.resizeCanvas();
+
+        const rect = this.photoContainer.getBoundingClientRect();
+        this.canvas.width = rect.width + 400;
+        this.canvas.height = rect.height + 400;
+        this.centerX = this.canvas.width / 2;
+        this.centerY = this.canvas.height / 2;
+        this.radius = rect.width / 2;
     }
 
-    resizeCanvas() {
-        const rect = this.photoContainer.getBoundingClientRect();
-        this.canvas.width = rect.width;
-        this.canvas.height = rect.height;
+    sampleImageAndCreateParticles() {
+        // Create a temporary canvas to sample the image
+        const tempCanvas = document.createElement('canvas');
+        const size = 300; // Match photo size
+        tempCanvas.width = size;
+        tempCanvas.height = size;
+        const tempCtx = tempCanvas.getContext('2d');
+
+        // Draw circular clipped image
+        tempCtx.beginPath();
+        tempCtx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+        tempCtx.clip();
+        tempCtx.drawImage(this.heroPhoto, 0, 0, size, size);
+
+        // Get image data
+        const imageData = tempCtx.getImageData(0, 0, size, size);
+        const pixels = imageData.data;
+
+        this.particles = [];
+
+        // Sample pixels in a grid pattern
+        for (let y = 0; y < size; y += this.tileSize) {
+            for (let x = 0; x < size; x += this.tileSize) {
+                // Check if this pixel is inside the circle
+                const dx = x - size / 2;
+                const dy = y - size / 2;
+                const distFromCenter = Math.sqrt(dx * dx + dy * dy);
+
+                if (distFromCenter < size / 2 - 2) {
+                    // Get pixel color at this position
+                    const i = (y * size + x) * 4;
+                    const r = pixels[i];
+                    const g = pixels[i + 1];
+                    const b = pixels[i + 2];
+                    const a = pixels[i + 3];
+
+                    // Skip transparent pixels
+                    if (a < 50) continue;
+
+                    // Position in the main canvas (offset by 200 for the expanded canvas)
+                    const originX = x + 200;
+                    const originY = y + 200;
+
+                    // Calculate fly direction (outward from center)
+                    const angle = Math.atan2(dy, dx);
+                    const flyAngle = angle + (Math.random() - 0.5) * 0.8;
+                    const flyDistance = 120 + Math.random() * 180;
+
+                    this.particles.push({
+                        // Position on main canvas
+                        x: originX,
+                        y: originY,
+                        originX: originX,
+                        originY: originY,
+                        // Target position
+                        targetX: originX + Math.cos(flyAngle) * flyDistance,
+                        targetY: originY + Math.sin(flyAngle) * flyDistance,
+                        // Color from actual image
+                        r: r,
+                        g: g,
+                        b: b,
+                        // Size
+                        size: this.tileSize,
+                        // Delay for staggered effect (outer particles fly first)
+                        delay: (distFromCenter / (size / 2)) * 0.4,
+                        // Rotation
+                        rotation: 0,
+                        targetRotation: (Math.random() - 0.5) * Math.PI * 2
+                    });
+                }
+            }
+        }
+
+        this.imageLoaded = true;
     }
 
     handleScroll() {
         const scrollY = window.scrollY;
-        const progress = Math.min(scrollY / (this.scrollThreshold * 3), 1);
 
+        let progress = 0;
         if (scrollY > this.scrollThreshold) {
-            if (!this.isDissolving) {
-                this.startDissolve();
-            }
-            this.updateDissolve(progress);
-        } else {
-            if (this.isDissolving || this.photoContainer.classList.contains('hidden')) {
-                this.reverseDissolve(progress);
-            }
+            progress = Math.min((scrollY - this.scrollThreshold) / (this.maxScroll - this.scrollThreshold), 1);
+        }
+
+        this.lastProgress = progress;
+
+        // Hide original photo as particles take over
+        if (this.heroPhoto) {
+            this.heroPhoto.style.opacity = 1 - progress;
         }
     }
 
-    startDissolve() {
-        this.isDissolving = true;
-        this.photoContainer.classList.add('dissolving');
-        this.createParticles();
-        this.animateParticles();
-    }
-
-    createParticles() {
-        this.particles = [];
-        const rect = this.photoContainer.getBoundingClientRect();
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const radius = rect.width / 2;
-
-        // Create particles around the circular photo
-        for (let i = 0; i < 100; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            const r = Math.random() * radius * 0.9;
-            const x = centerX + Math.cos(angle) * r;
-            const y = centerY + Math.sin(angle) * r;
-
-            this.particles.push({
-                x: x,
-                y: y,
-                originX: x,
-                originY: y,
-                size: Math.random() * 4 + 1,
-                speedX: (Math.random() - 0.5) * 8,
-                speedY: (Math.random() - 0.5) * 8 - 2, // Slight upward bias
-                life: 1,
-                decay: Math.random() * 0.01 + 0.005,
-                color: this.getRandomColor(),
-                active: false
-            });
-        }
-    }
-
-    getRandomColor() {
-        const colors = [
-            'rgba(0, 212, 255, ',
-            'rgba(124, 58, 237, ',
-            'rgba(244, 114, 182, ',
-            'rgba(255, 255, 255, '
-        ];
-        return colors[Math.floor(Math.random() * colors.length)];
-    }
-
-    updateDissolve(progress) {
-        // Activate particles based on progress
-        const activeCount = Math.floor(this.particles.length * progress);
-        for (let i = 0; i < activeCount; i++) {
-            if (!this.particles[i].active) {
-                this.particles[i].active = true;
-            }
-        }
-
-        // Update photo opacity and blur
-        if (this.photoContainer) {
-            const opacity = 1 - progress;
-            const blur = progress * 8;
-            const scale = 1 - (progress * 0.2);
-
-            this.photoContainer.style.opacity = Math.max(0, opacity);
-            this.photoContainer.style.filter = `blur(${blur}px)`;
-            this.photoContainer.style.transform = `scale(${scale})`;
-
-            if (progress >= 1) {
-                this.photoContainer.classList.add('hidden');
-                this.photoContainer.classList.remove('dissolving');
-            }
-        }
-    }
-
-    reverseDissolve(progress) {
-        // Reverse the dissolve effect
-        this.isDissolving = false;
-        this.photoContainer.classList.remove('dissolving');
-        this.photoContainer.classList.remove('hidden');
-
-        const opacity = 1 - progress;
-        const blur = progress * 8;
-        const scale = 1 - (progress * 0.2);
-
-        this.photoContainer.style.opacity = Math.max(0.1, opacity);
-        this.photoContainer.style.filter = `blur(${blur}px)`;
-        this.photoContainer.style.transform = `scale(${scale})`;
-
-        if (progress <= 0) {
-            this.photoContainer.style.opacity = 1;
-            this.photoContainer.style.filter = '';
-            this.photoContainer.style.transform = '';
-            this.particles = [];
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        }
-    }
-
-    animateParticles() {
-        if (!this.isDissolving && this.particles.every(p => !p.active)) {
+    animate() {
+        if (!this.imageLoaded) {
+            requestAnimationFrame(() => this.animate());
             return;
         }
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        for (let i = this.particles.length - 1; i >= 0; i--) {
+        const progress = this.lastProgress;
+
+        for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
 
-            if (p.active) {
-                p.x += p.speedX;
-                p.y += p.speedY;
-                p.life -= p.decay;
-                p.size *= 0.99;
-                p.speedY += 0.05; // Gravity
+            // Staggered animation based on delay
+            let adjustedProgress = Math.max(0, (progress - p.delay) / (1 - p.delay));
+            adjustedProgress = Math.min(1, adjustedProgress);
 
-                if (p.life > 0 && p.size > 0.5) {
-                    // Draw particle
-                    this.ctx.beginPath();
-                    this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    this.ctx.fillStyle = p.color + p.life + ')';
-                    this.ctx.fill();
+            // Eased progress for smooth animation
+            const easedProgress = this.easeOutCubic(adjustedProgress);
 
-                    // Glow effect
-                    this.ctx.beginPath();
-                    this.ctx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
-                    this.ctx.fillStyle = p.color + (p.life * 0.3) + ')';
-                    this.ctx.fill();
-                }
+            // Interpolate position
+            const x = p.originX + (p.targetX - p.originX) * easedProgress;
+            const y = p.originY + (p.targetY - p.originY) * easedProgress;
+
+            // Rotation
+            const rotation = p.targetRotation * easedProgress;
+
+            // Opacity: particles visible when moving, fade out at end
+            let opacity = 1;
+            if (adjustedProgress > 0.7) {
+                opacity = 1 - ((adjustedProgress - 0.7) / 0.3);
+            }
+
+            // Size: slightly shrink as they fly
+            const size = p.size * (1 - easedProgress * 0.3);
+
+            // Only draw if particle has started moving OR we're scrolled
+            if (progress > 0) {
+                this.ctx.save();
+                this.ctx.translate(x, y);
+                this.ctx.rotate(rotation);
+                this.ctx.globalAlpha = opacity;
+                this.ctx.fillStyle = `rgb(${p.r}, ${p.g}, ${p.b})`;
+                this.ctx.fillRect(-size / 2, -size / 2, size, size);
+                this.ctx.restore();
             }
         }
 
-        if (this.isDissolving) {
-            requestAnimationFrame(() => this.animateParticles());
-        }
+        requestAnimationFrame(() => this.animate());
+    }
+
+    easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
     }
 }
 
