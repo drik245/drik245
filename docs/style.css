@@ -355,9 +355,121 @@ body {
     padding: 0 30px;
 }
 
+/* Hero Photo Container */
+.hero-photo-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -60px;
+    /* Overlap with the title */
+    z-index: 1;
+}
+
+.hero-photo-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid transparent;
+    background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+        var(--gradient-primary) border-box;
+    box-shadow:
+        0 0 40px rgba(0, 212, 255, 0.3),
+        0 0 80px rgba(124, 58, 237, 0.2),
+        inset 0 0 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease;
+}
+
+.hero-photo-container::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    z-index: -1;
+    animation: photoGlow 3s ease-in-out infinite;
+}
+
+@keyframes photoGlow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
+}
+
+.hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(20%) contrast(1.1);
+    transition: all 0.5s ease;
+}
+
+.hero-photo-container:hover .hero-photo {
+    filter: grayscale(0%) contrast(1.15) brightness(1.1);
+    transform: scale(1.05);
+}
+
+/* Dust Overlay for Dissolve Effect */
+.photo-dust-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Dissolve Effect Classes - Applied via JS */
+.hero-photo-container.dissolving {
+    animation: dustDissolve 0.5s ease forwards;
+}
+
+.hero-photo-container.dissolving .hero-photo {
+    filter: blur(5px) grayscale(100%);
+}
+
+.hero-photo-container.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+@keyframes dustDissolve {
+    0% {
+        filter: blur(0);
+        opacity: 1;
+    }
+
+    50% {
+        filter: blur(3px);
+        opacity: 0.6;
+    }
+
+    100% {
+        filter: blur(8px);
+        opacity: 0;
+    }
+}
+
 /* Glitch Effect */
 .glitch-container {
     margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    /* Ensure title is above the photo */
 }
 
 .glitch {
@@ -908,6 +1020,23 @@ body {
 
 .project-link:hover {
     gap: 12px;
+}
+
+/* Project Links Container for Multiple Links */
+.project-links-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+.project-link.demo-link {
+    color: var(--accent-tertiary);
+}
+
+.project-link.demo-link:hover {
+    color: var(--accent-tertiary);
+    text-shadow: 0 0 10px rgba(244, 114, 182, 0.5);
 }
 
 /* Timeline / Experience */

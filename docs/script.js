@@ -404,6 +404,210 @@ class ParallaxOrbs {
 }
 
 // ==========================================
+// HERO PHOTO DUST DISSOLVE ON SCROLL
+// ==========================================
+
+class HeroPhotoDissolve {
+    constructor() {
+        this.photoContainer = document.querySelector('.hero-photo-container');
+        this.photoWrapper = document.querySelector('.hero-photo-wrapper');
+        this.dustOverlay = document.getElementById('photoDust');
+        this.particles = [];
+        this.isDissolving = false;
+        this.scrollThreshold = 100;
+        this.canvas = null;
+
+        if (this.photoContainer) {
+            this.init();
+        }
+    }
+
+    init() {
+        // Create canvas for dust particles
+        this.createDustCanvas();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', () => this.handleScroll());
+
+        // Initial check
+        this.handleScroll();
+    }
+
+    createDustCanvas() {
+        this.canvas = document.createElement('canvas');
+        this.canvas.classList.add('dust-canvas');
+        this.canvas.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        `;
+        this.photoContainer.appendChild(this.canvas);
+        this.ctx = this.canvas.getContext('2d');
+        this.resizeCanvas();
+    }
+
+    resizeCanvas() {
+        const rect = this.photoContainer.getBoundingClientRect();
+        this.canvas.width = rect.width;
+        this.canvas.height = rect.height;
+    }
+
+    handleScroll() {
+        const scrollY = window.scrollY;
+        const progress = Math.min(scrollY / (this.scrollThreshold * 3), 1);
+
+        if (scrollY > this.scrollThreshold) {
+            if (!this.isDissolving) {
+                this.startDissolve();
+            }
+            this.updateDissolve(progress);
+        } else {
+            if (this.isDissolving || this.photoContainer.classList.contains('hidden')) {
+                this.reverseDissolve(progress);
+            }
+        }
+    }
+
+    startDissolve() {
+        this.isDissolving = true;
+        this.photoContainer.classList.add('dissolving');
+        this.createParticles();
+        this.animateParticles();
+    }
+
+    createParticles() {
+        this.particles = [];
+        const rect = this.photoContainer.getBoundingClientRect();
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const radius = rect.width / 2;
+
+        // Create particles around the circular photo
+        for (let i = 0; i < 100; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const r = Math.random() * radius * 0.9;
+            const x = centerX + Math.cos(angle) * r;
+            const y = centerY + Math.sin(angle) * r;
+
+            this.particles.push({
+                x: x,
+                y: y,
+                originX: x,
+                originY: y,
+                size: Math.random() * 4 + 1,
+                speedX: (Math.random() - 0.5) * 8,
+                speedY: (Math.random() - 0.5) * 8 - 2, // Slight upward bias
+                life: 1,
+                decay: Math.random() * 0.01 + 0.005,
+                color: this.getRandomColor(),
+                active: false
+            });
+        }
+    }
+
+    getRandomColor() {
+        const colors = [
+            'rgba(0, 212, 255, ',
+            'rgba(124, 58, 237, ',
+            'rgba(244, 114, 182, ',
+            'rgba(255, 255, 255, '
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    updateDissolve(progress) {
+        // Activate particles based on progress
+        const activeCount = Math.floor(this.particles.length * progress);
+        for (let i = 0; i < activeCount; i++) {
+            if (!this.particles[i].active) {
+                this.particles[i].active = true;
+            }
+        }
+
+        // Update photo opacity and blur
+        if (this.photoContainer) {
+            const opacity = 1 - progress;
+            const blur = progress * 8;
+            const scale = 1 - (progress * 0.2);
+
+            this.photoContainer.style.opacity = Math.max(0, opacity);
+            this.photoContainer.style.filter = `blur(${blur}px)`;
+            this.photoContainer.style.transform = `scale(${scale})`;
+
+            if (progress >= 1) {
+                this.photoContainer.classList.add('hidden');
+                this.photoContainer.classList.remove('dissolving');
+            }
+        }
+    }
+
+    reverseDissolve(progress) {
+        // Reverse the dissolve effect
+        this.isDissolving = false;
+        this.photoContainer.classList.remove('dissolving');
+        this.photoContainer.classList.remove('hidden');
+
+        const opacity = 1 - progress;
+        const blur = progress * 8;
+        const scale = 1 - (progress * 0.2);
+
+        this.photoContainer.style.opacity = Math.max(0.1, opacity);
+        this.photoContainer.style.filter = `blur(${blur}px)`;
+        this.photoContainer.style.transform = `scale(${scale})`;
+
+        if (progress <= 0) {
+            this.photoContainer.style.opacity = 1;
+            this.photoContainer.style.filter = '';
+            this.photoContainer.style.transform = '';
+            this.particles = [];
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+    }
+
+    animateParticles() {
+        if (!this.isDissolving && this.particles.every(p => !p.active)) {
+            return;
+        }
+
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+            const p = this.particles[i];
+
+            if (p.active) {
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.life -= p.decay;
+                p.size *= 0.99;
+                p.speedY += 0.05; // Gravity
+
+                if (p.life > 0 && p.size > 0.5) {
+                    // Draw particle
+                    this.ctx.beginPath();
+                    this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    this.ctx.fillStyle = p.color + p.life + ')';
+                    this.ctx.fill();
+
+                    // Glow effect
+                    this.ctx.beginPath();
+                    this.ctx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
+                    this.ctx.fillStyle = p.color + (p.life * 0.3) + ')';
+                    this.ctx.fill();
+                }
+            }
+        }
+
+        if (this.isDissolving) {
+            requestAnimationFrame(() => this.animateParticles());
+        }
+    }
+}
+
+// ==========================================
 // MAGNETIC BUTTONS
 // ==========================================
 
@@ -522,7 +726,7 @@ document.addEventListener('DOMContentLoaded', () => {
         new TypingAnimation(typingElement, [
             'FPGA Designer',
             'Embedded Systems Developer',
-            'IoT & HardwareEnthusiast',
+            'IoT & Hardware Enthusiast',
             'Technical Head',
         ], 80, 2500);
     }
@@ -538,6 +742,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize parallax orbs
     new ParallaxOrbs();
+
+    // Initialize hero photo dissolve effect
+    new HeroPhotoDissolve();
 
     // Initialize magnetic buttons
     new MagneticButtons();
