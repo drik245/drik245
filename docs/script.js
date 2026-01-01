@@ -419,7 +419,7 @@ class HeroPhotoDissolve {
         this.canvas = null;
         this.lastProgress = 0;
         this.imageLoaded = false;
-        this.tileSize = 4; // Size of each particle tile (smaller = more particles)
+        this.tileSize = 1; // Size of each particle tile (smaller = more particles)
 
         if (this.photoContainer && this.heroPhoto) {
             this.init();
