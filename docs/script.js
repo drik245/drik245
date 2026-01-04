@@ -269,10 +269,14 @@ class CounterAnimation {
     }
 
     animateCounter(element) {
-        const target = parseInt(element.dataset.count);
+        const target = parseFloat(element.dataset.count);
         const duration = 2000;
         const start = 0;
         const startTime = performance.now();
+
+        // Check if target has decimals
+        const hasDecimals = target % 1 !== 0;
+        const decimalPlaces = hasDecimals ? (element.dataset.count.split('.')[1] || '').length : 0;
 
         const updateCounter = (currentTime) => {
             const elapsed = currentTime - startTime;
@@ -280,14 +284,15 @@ class CounterAnimation {
 
             // Easing function
             const easeOut = 1 - Math.pow(1 - progress, 3);
-            const current = Math.floor(start + (target - start) * easeOut);
+            const current = start + (target - start) * easeOut;
 
-            element.textContent = current;
+            // Format with correct decimal places
+            element.textContent = hasDecimals ? current.toFixed(decimalPlaces) : Math.floor(current);
 
             if (progress < 1) {
                 requestAnimationFrame(updateCounter);
             } else {
-                element.textContent = target;
+                element.textContent = hasDecimals ? target.toFixed(decimalPlaces) : target;
             }
         };
 
