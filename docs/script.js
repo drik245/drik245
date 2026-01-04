@@ -32,6 +32,7 @@ class ParticleTrail {
     }
 
     bindEvents() {
+        // Mouse events for desktop
         document.addEventListener('mousemove', (e) => {
             this.mouse.x = e.clientX;
             this.mouse.y = e.clientY;
@@ -51,6 +52,29 @@ class ParticleTrail {
             // Create burst of particles on click
             this.createBurst(e.clientX, e.clientY);
         });
+
+        // Touch events for mobile
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            this.mouse.x = touch.clientX;
+            this.mouse.y = touch.clientY;
+            this.isMoving = true;
+
+            // Create particles on touch move
+            this.createParticles(touch.clientX, touch.clientY);
+
+            // Clear the moving flag after a delay
+            clearTimeout(this.moveTimeout);
+            this.moveTimeout = setTimeout(() => {
+                this.isMoving = false;
+            }, 100);
+        }, { passive: true });
+
+        document.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            // Create a small burst on touch start
+            this.createParticles(touch.clientX, touch.clientY);
+        }, { passive: true });
     }
 
     createParticles(x, y) {

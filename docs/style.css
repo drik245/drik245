@@ -371,51 +371,16 @@ body {
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    border: 3px solid transparent;
-    background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
-        var(--gradient-primary) border-box;
-    box-shadow:
-        0 0 30px rgba(0, 212, 255, 0.3),
-        0 0 60px rgba(124, 58, 237, 0.2),
-        0 0 90px rgba(0, 212, 255, 0.1);
-    transition: all 0.4s ease;
-    animation: photoGlow 4s ease-in-out infinite;
-}
-
-.hero-photo-container::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    background: var(--gradient-primary);
-    z-index: -1;
-    opacity: 0.5;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
 }
 
 .hero-photo-container:hover {
-    transform: scale(1.03);
+    transform: scale(1.08);
     box-shadow:
-        0 0 40px rgba(0, 212, 255, 0.4),
-        0 0 80px rgba(124, 58, 237, 0.3),
-        0 0 120px rgba(0, 212, 255, 0.15);
-}
-
-@keyframes photoGlow {
-
-    0%,
-    100% {
-        box-shadow:
-            0 0 30px rgba(0, 212, 255, 0.3),
-            0 0 60px rgba(124, 58, 237, 0.2),
-            0 0 90px rgba(0, 212, 255, 0.1);
-    }
-
-    50% {
-        box-shadow:
-            0 0 40px rgba(0, 212, 255, 0.4),
-            0 0 80px rgba(124, 58, 237, 0.25),
-            0 0 100px rgba(0, 212, 255, 0.15);
-    }
+        0 0 40px rgba(0, 212, 255, 0.3),
+        0 0 80px rgba(124, 58, 237, 0.2);
 }
 
 .hero-photo {
@@ -429,7 +394,8 @@ body {
 }
 
 .hero-photo-container:hover .hero-photo {
-    filter: grayscale(0%) contrast(1.15) brightness(1.1);
+    filter: grayscale(0%) contrast(1.15) brightness(1.15);
+    transform: scale(1.05);
 }
 
 /* Glitch Effect */
