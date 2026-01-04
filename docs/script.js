@@ -1,11 +1,7 @@
-/* ============================================
-   DRIK PAUL - PORTFOLIO WEBSITE
-   JavaScript - Particle Trail Cursor & Interactions
-   ============================================ */
+/* DRIK PAUL - PORTFOLIO WEBSITE
+   JavaScript - Particle Trail Cursor & Interactions */
 
-// ==========================================
 // PARTICLE TRAIL CURSOR SYSTEM
-// ==========================================
 
 class ParticleTrail {
     constructor() {
@@ -204,9 +200,7 @@ class ParticleTrail {
     }
 }
 
-// ==========================================
 // TYPING ANIMATION
-// ==========================================
 
 class TypingAnimation {
     constructor(element, texts, speed = 100, pause = 2000) {
@@ -251,9 +245,7 @@ class TypingAnimation {
     }
 }
 
-// ==========================================
 // COUNTER ANIMATION
-// ==========================================
 
 class CounterAnimation {
     constructor() {
@@ -303,9 +295,7 @@ class CounterAnimation {
     }
 }
 
-// ==========================================
 // SCROLL REVEAL ANIMATION
-// ==========================================
 
 class ScrollReveal {
     constructor() {
@@ -328,9 +318,7 @@ class ScrollReveal {
     }
 }
 
-// ==========================================
 // SMOOTH SCROLL & NAVIGATION
-// ==========================================
 
 class Navigation {
     constructor() {
@@ -401,9 +389,7 @@ class Navigation {
     }
 }
 
-// ==========================================
 // PARALLAX EFFECT FOR ORBS
-// ==========================================
 
 class ParallaxOrbs {
     constructor() {
@@ -427,15 +413,11 @@ class ParallaxOrbs {
     }
 }
 
-// ==========================================
 // HERO PHOTO DISSOLVE - DISABLED
 // User will implement this effect later
-// ==========================================
 
 
-// ==========================================
 // MAGNETIC BUTTONS
-// ==========================================
 
 class MagneticButtons {
     constructor() {
@@ -460,9 +442,7 @@ class MagneticButtons {
     }
 }
 
-// ==========================================
 // TILT EFFECT FOR CARDS
-// ==========================================
 
 class TiltCards {
     constructor() {
@@ -493,9 +473,7 @@ class TiltCards {
     }
 }
 
-// ==========================================
 // SKILL TAG HOVER EFFECT
-// ==========================================
 
 class SkillTagsEffect {
     constructor() {
@@ -538,9 +516,7 @@ class SkillTagsEffect {
     }
 }
 
-// ==========================================
 // INITIALIZE EVERYTHING
-// ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize particle cursor
@@ -584,9 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('%c🚀 Drik Paul Portfolio Loaded!', 'color: #00d4ff; font-size: 20px; font-weight: bold;');
 });
 
-// ==========================================
 // PRELOADER (Optional)
-// ==========================================
 
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
