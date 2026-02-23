@@ -81,9 +81,11 @@ Education: B.Tech ECE
 
 | 🎯 Achievement | 📅 Year | 📝 Details |
 |:-------------:|:-------:|:----------:|
+| 👑 **Vice-President** | Jan 2026-Present | Leading Resonance (Electronics Student Club) at Bennett University |
 | 🏆 **SIH 2025 Finalist** | 2025 | Ranked **14 out of 600** teams in internal rounds |
 | 🚀 **IIT Roorkee E-Summit** | 2025 | Participated in premier entrepreneurship summit |
-| 👑 **Technical Head** | 2024-Present | Leading tech initiatives at Bennett University |
+| 👑 **Technical Head** | 2024-Dec 2025 | Led tech initiatives at Resonance (Electronics Student Club) |
+| 💼 **Customer Service Delight** | Dec 2024-Apr 2025 | Dose Inc. |
 | 📣 **Outreach Programs** | 2024-Present | Conducted multiple university outreach events |
 
 </div>
