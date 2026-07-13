@@ -49,7 +49,6 @@
 
 html {
     scroll-behavior: smooth;
-    cursor: none;
 }
 
 body {
@@ -58,26 +57,9 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
-    cursor: none;
 }
 
-/* Hide default cursor on all elements */
-*,
-*::before,
-*::after {
-    cursor: none !important;
-}
 
-/* Particle Canvas */
-#particle-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 9999;
-}
 
 /* Animated Background */
 .grid-background {
@@ -393,112 +375,23 @@ body {
     transform: scale(1.05);
 }
 
-/* Glitch Effect */
-.glitch-container {
+/* Hero Name */
+.hero-name-container {
     margin-bottom: 20px;
     position: relative;
     z-index: 2;
-    /* Ensure title is above the photo */
 }
 
-.glitch {
+.hero-name {
     font-family: var(--font-display);
     font-size: clamp(3rem, 8vw, 5rem);
     font-weight: 900;
     letter-spacing: 0.1em;
-    position: relative;
     color: var(--text-primary);
     text-shadow:
         0 0 10px rgba(0, 212, 255, 0.5),
         0 0 20px rgba(0, 212, 255, 0.3),
         0 0 40px rgba(0, 212, 255, 0.2);
-    animation: glitch 3s ease-in-out infinite;
-}
-
-.glitch::before,
-.glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.glitch::before {
-    color: var(--accent-primary);
-    animation: glitch-1 0.3s ease-in-out infinite;
-    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-    transform: translate(-2px, -2px);
-    opacity: 0.8;
-}
-
-.glitch::after {
-    color: var(--accent-tertiary);
-    animation: glitch-2 0.3s ease-in-out infinite;
-    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-    transform: translate(2px, 2px);
-    opacity: 0.8;
-}
-
-@keyframes glitch {
-
-    0%,
-    100% {
-        text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3);
-    }
-
-    50% {
-        text-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(0, 212, 255, 0.5);
-    }
-}
-
-@keyframes glitch-1 {
-
-    0%,
-    100% {
-        transform: translate(0);
-    }
-
-    20% {
-        transform: translate(-3px, 3px);
-    }
-
-    40% {
-        transform: translate(-3px, -3px);
-    }
-
-    60% {
-        transform: translate(3px, 3px);
-    }
-
-    80% {
-        transform: translate(3px, -3px);
-    }
-}
-
-@keyframes glitch-2 {
-
-    0%,
-    100% {
-        transform: translate(0);
-    }
-
-    20% {
-        transform: translate(3px, -3px);
-    }
-
-    40% {
-        transform: translate(3px, 3px);
-    }
-
-    60% {
-        transform: translate(-3px, -3px);
-    }
-
-    80% {
-        transform: translate(-3px, 3px);
-    }
 }
 
 /* Typing Animation */
@@ -1273,7 +1166,7 @@ body {
 }
 
 @media (max-width: 480px) {
-    .glitch {
+    .hero-name {
         font-size: 2.5rem;
     }
 
