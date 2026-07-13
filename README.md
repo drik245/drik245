@@ -66,12 +66,17 @@ Education: B.Tech ECE
 ## <img src="https://media.giphy.com/media/WFZvB7VIXBgiz3oDXE/giphy.gif" width="30"> Featured Projects
 ### 🚀 Project Highlights
 
-| Project | Description | Tech Stack | Status |
-|:-------:|:-----------:|:----------:|:------:|
-| 🌾 **AgroSmart** | Smart irrigation & crop health monitoring system | ESP32, Sensors, C++ | ✅ Complete |
-| 🎹 **FPGA Sound Synth** | Digital Synthesizer (Korg Minilogue XD Clone) | Verilog, Vivado, MATLAB, Simulink | 🔄 In Progress |
-| 🔐 **BLE Encryption** | FIDO2 protocol implementation with BLE & user presence | BLE, Embedded C | 🔄 In Progress |
-| 🔊 **ESP32 Spatial Audio** | 3D spatial audio processing on ESP32 | ESP32, C++, DSP | ✅ Complete |
+| Project | Description | Tech Stack |
+|:-------:|:-----------:|:----------:|
+| 🌾 **AgroSmart** | Smart irrigation & crop health monitoring system | ESP32, Sensors, C++ |
+| 🎹 **FPGA Sound Synth** | Digital Synthesizer (Korg Minilogue XD Clone) | Verilog, Vivado, MATLAB, Simulink |
+| 🔐 **BLE Encryption** | FIDO2 protocol implementation with BLE & user presence | BLE, Embedded C |
+| 🔊 **ESP32 Spatial Audio** | 3D spatial audio processing on ESP32 | ESP32, C++, DSP |
+| 🟩 **Matrix Display Driver** | MicroPython library for 8x8 LED matrix displays | MicroPython, Embedded |
+| ⚡ **V4K Shrike** | Ready-to-use IoT projects for Shrike-Lite/ShrikeFi | C++, IoT, ESP32 |
+| 🚗 **LPC1768 CAN Driver** | CAN bus driver for NXP LPC1768 microcontroller | C, CAN Bus, Embedded |
+
+
 ---
 
 <!-- Achievements Section -->
