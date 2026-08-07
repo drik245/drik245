@@ -278,6 +278,17 @@ function initTerminal() {
         if (e.target === overlay) toggleTerminal();
     });
 
+    // Mobile Easter Egg Trigger: Click the SIGNAL DECK logo
+    const callsign = document.querySelector('.nav-callsign');
+    if (callsign) {
+        callsign.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                toggleTerminal();
+            }
+        });
+    }
+
     function toggleTerminal() {
         isTerminalOpen = !isTerminalOpen;
         if (isTerminalOpen) {
