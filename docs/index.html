@@ -1,206 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Drik Paul - Electronics & Communication Engineer | Embedded Systems Developer | FPGA Designer">
-    <meta name="keywords" content="Drik Paul, ECE, Electronics, FPGA, ESP32, Embedded Systems, Bennett University">
+    <meta name="description" content="Drik Paul — Electronics & Communication Engineer. FPGA designer, embedded systems developer, IoT architect.">
+    <meta name="keywords" content="Drik Paul, ECE, FPGA, ESP32, Embedded Systems, Bennett University, Signal Deck">
     <meta name="author" content="Drik Paul">
+    <title>Signal Deck — Drik Paul</title>
 
-    <title>Drik Paul | Engineer & Hardware Developer</title>
-
-    <!-- Google Fonts -->
+    <!-- Fonts: Space Grotesk · Fraunces · JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
+    <!-- Cursor-follow glow (desktop only, disabled on touch) -->
+    <div class="cursor-glow" id="cursorGlow"></div>
 
-    <!-- Animated Background Grid -->
-    <div class="grid-background"></div>
-    <div class="glow-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="glass-nav">
-        <div class="nav-container">
-            <a href="#home" class="logo">
-                <span class="logo-bracket">&lt;</span>
-                <span class="logo-text">DP</span>
-                <span class="logo-bracket">/&gt;</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#education" class="nav-link">Education</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <!-- ── Navigation ──────────────────────────────────────── -->
+    <nav class="deck-nav" id="deckNav">
+        <a href="#home" class="nav-callsign">SIGNAL DECK</a>
+        <div class="nav-links" id="navLinks">
+            <a href="#about" class="nav-link" data-section="about">ABOUT</a>
+            <a href="#skills" class="nav-link" data-section="skills">SKILLS</a>
+            <a href="#projects" class="nav-link" data-section="projects">PROJECTS</a>
+            <a href="#timeline" class="nav-link" data-section="timeline">TIMELINE</a>
+            <a href="#contact" class="nav-link" data-section="contact">CONTACT</a>
         </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <span></span><span></span>
+        </button>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- ── HERO ────────────────────────────────────────────── -->
     <section id="home" class="hero">
+        <!-- Schematic grid background -->
+        <div class="hero-grid" id="heroGrid"></div>
+
         <div class="hero-content">
-            <!-- Hero Photo Container -->
-            <div class="hero-photo-wrapper">
-                <div class="hero-photo-container">
-                    <img src="drik.jpg" alt="Drik Paul" class="hero-photo" id="heroPhoto">
-                    <div class="photo-dust-overlay" id="photoDust"></div>
-                </div>
-            </div>
-            <div class="hero-name-container">
-                <h1 class="hero-name">DRIK PAUL</h1>
-            </div>
-            <div class="typing-container">
-                <span class="typing-text"></span>
-                <span class="cursor">|</span>
-            </div>
-            <p class="hero-subtitle">
-                <span class="highlight">Electronics & Communication Engineer</span> crafting
-                <span class="highlight">intelligent hardware</span> solutions
+            <h1 class="hero-name" data-reveal>DRIK<br>PAUL</h1>
+            <p class="hero-prompt" data-reveal data-delay="200">
+                <span class="prompt-char">&gt;</span> currently building intelligent hardware systems<span class="blink">_</span>
             </p>
-            <div class="hero-stats">
-                <div class="stat-item glass-card-mini">
-                    <span class="stat-number" data-count="7.75">0</span>
-                    <span class="stat-label">Current CGPA</span>
-                </div>
-                <div class="stat-item glass-card-mini">
-                    <span class="stat-number" data-count="7">0</span>
-                    <span class="stat-label">Projects</span>
-                </div>
-                <div class="stat-item glass-card-mini">
-                    <span class="stat-number" data-count="2028">0</span>
-                    <span class="stat-label">Graduating</span>
-                </div>
-                <div class="stat-item glass-card-mini">
-                    <span class="stat-number" data-count="14">0</span>
-                    <span class="stat-label">SIH Rank / 600</span>
-                </div>
-            </div>
-            <div class="hero-cta">
-                <a href="#projects" class="btn btn-primary">
-                    <span>View Projects</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                <a href="#contact" class="btn btn-secondary">
-                    <span>Get In Touch</span>
-                    <i class="fas fa-envelope"></i>
-                </a>
-            </div>
         </div>
-        <!-- <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-            <span>Scroll Down</span>
-        </div> -->
+
+        <div class="scroll-cue" data-reveal data-delay="600">
+            <span class="scroll-line"></span>
+        </div>
     </section>
 
-    <!-- About Section -->
+    <!-- ── ABOUT ───────────────────────────────────────────── -->
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title">
-                <span class="title-bracket">{</span>
-                About Me
-                <span class="title-bracket">}</span>
-            </h2>
-            <div class="about-grid">
-                <div class="about-text glass-card">
-                    <div class="terminal-header">
-                        <div class="terminal-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                        <span class="terminal-title">about.yaml</span>
-                    </div>
-                    <div class="terminal-body">
-                        <pre><code><span class="yaml-key">name:</span> <span class="yaml-value">"Drik Paul"</span>
-<span class="yaml-key">location:</span> <span class="yaml-value">"Ghaziabad, UP, India 🇮🇳"</span>
-<span class="yaml-key">education:</span>
-  <span class="yaml-key">degree:</span> <span class="yaml-value">"B.Tech ECE"</span>
-  <span class="yaml-key">university:</span> <span class="yaml-value">"Bennett University"</span>
-  <span class="yaml-key">year:</span> <span class="yaml-value">"2024 - 2028"</span>
-<span class="yaml-key">role:</span> <span class="yaml-value">"Vice-President, Resonance (Electronics Student Club)"</span>
-<span class="yaml-key">focus:</span>
-  <span class="yaml-dash">-</span> <span class="yaml-value">"FPGA Design & Verilog"</span>
-  <span class="yaml-dash">-</span> <span class="yaml-value">"Embedded Systems (ESP32)"</span>
-  <span class="yaml-dash">-</span> <span class="yaml-value">"IoT and Software"</span>
-  <span class="yaml-dash">-</span> <span class="yaml-value">"Digital Signal Processing"</span>
-  <span class="yaml-dash">-</span> <span class="yaml-value">"RF and Hardware Design"</span>
-</code></pre>
-                    </div>
+            <span class="section-label" data-reveal>&gt; ABOUT</span>
+
+            <div class="about-split">
+                <div class="about-prose" data-reveal>
+                    <p>Electronics &amp; Communication Engineer with a strong foundation in embedded systems, FPGA development, and IoT. Passionate about the intersection of hardware design, real-time systems, and AI-driven automation to build next-generation intelligent technologies.</p>
                 </div>
-                <div class="about-highlights">
-                    <div class="highlight-card glass-card">
-                        <div class="highlight-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <h3>SIH 2025 Finalist</h3>
-                        <p>Ranked <strong>14 out of 600</strong> teams in internal rounds</p>
+
+                <div class="about-spec" data-reveal data-delay="100">
+                    <div class="spec-row">
+                        <span class="spec-key">LOCATION</span>
+                        <span class="spec-val">Ghaziabad, IN</span>
                     </div>
-                    <div class="highlight-card glass-card">
-                        <div class="highlight-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h3>IIT Roorkee E-Summit</h3>
-                        <p>Participated in premier entrepreneurship summit 2025</p>
+                    <div class="spec-row">
+                        <span class="spec-key">DEGREE</span>
+                        <span class="spec-val">B.Tech ECE</span>
                     </div>
-                    <div class="highlight-card glass-card">
-                        <div class="highlight-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Vice-President</h3>
-                        <p>Leading Resonance (Electronics Student Club) at Bennett University</p>
+                    <div class="spec-row">
+                        <span class="spec-key">UNIVERSITY</span>
+                        <span class="spec-val">Bennett University</span>
                     </div>
-                    <div class="highlight-card glass-card">
-                        <div class="highlight-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Outreach Events</h3>
-                        <p>Organized outreach events for awareness</p>
+                    <div class="spec-row">
+                        <span class="spec-key">YEAR</span>
+                        <span class="spec-val">2024 – 2028</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-key">ROLE</span>
+                        <span class="spec-val">VP, Resonance</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-key">STACK</span>
+                        <span class="spec-val">FPGA · ESP32 · IoT · DSP · RF</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- ── STATS BAR ───────────────────────────────────────── -->
+    <div class="stats-bar">
+        <div class="container">
+            <div class="stats-row">
+                <div class="stat-cell" data-reveal>
+                    <span class="stat-num" data-count="7.75">0</span>
+                    <span class="stat-label">CGPA</span>
+                </div>
+                <div class="stat-cell" data-reveal data-delay="80">
+                    <span class="stat-num" data-count="7">0</span>
+                    <span class="stat-label">PROJECTS</span>
+                </div>
+                <div class="stat-cell" data-reveal data-delay="160">
+                    <span class="stat-num" data-count="2028">0</span>
+                    <span class="stat-label">GRADUATING</span>
+                </div>
+                <div class="stat-cell" data-reveal data-delay="240">
+                    <span class="stat-num" data-count="14">0</span>
+                    <span class="stat-label">SIH RANK / 600</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── KNOWLEDGE STACK ─────────────────────────────────── -->
     <section id="skills" class="section">
         <div class="container">
-            <h2 class="section-title">
-                <span class="title-bracket">{</span>
-                Knowledge Stack
-                <span class="title-bracket">}</span>
-            </h2>
+            <span class="section-label" data-reveal>&gt; KNOWLEDGE STACK</span>
+
             <div class="skills-grid">
-                <div class="skill-category glass-card">
-                    <div class="category-header">
-                        <i class="fas fa-microchip"></i>
-                        <h3>Hardware & Embedded</h3>
-                    </div>
+                <div class="skill-panel" data-reveal>
+                    <h3 class="skill-cat-title">Hardware & Embedded</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">Verilog</span>
                         <span class="skill-tag">FPGA</span>
@@ -210,11 +133,9 @@
                         <span class="skill-tag">Raspberry Pi</span>
                     </div>
                 </div>
-                <div class="skill-category glass-card">
-                    <div class="category-header">
-                        <i class="fas fa-code"></i>
-                        <h3>Programming</h3>
-                    </div>
+
+                <div class="skill-panel" data-reveal data-delay="100">
+                    <h3 class="skill-cat-title">Programming</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">C++</span>
                         <span class="skill-tag">C</span>
@@ -223,11 +144,9 @@
                         <span class="skill-tag">Simulink</span>
                     </div>
                 </div>
-                <div class="skill-category glass-card">
-                    <div class="category-header">
-                        <i class="fas fa-drafting-compass"></i>
-                        <h3>CAD & PCB Design</h3>
-                    </div>
+
+                <div class="skill-panel" data-reveal data-delay="200">
+                    <h3 class="skill-cat-title">CAD & PCB Design</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">KiCad</span>
                         <span class="skill-tag">Altium</span>
@@ -235,11 +154,9 @@
                         <span class="skill-tag">Onshape</span>
                     </div>
                 </div>
-                <div class="skill-category glass-card">
-                    <div class="category-header">
-                        <i class="fas fa-palette"></i>
-                        <h3>Frontend & Design</h3>
-                    </div>
+
+                <div class="skill-panel" data-reveal data-delay="300">
+                    <h3 class="skill-cat-title">Frontend & Design</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">HTML5</span>
                         <span class="skill-tag">CSS3</span>
@@ -247,11 +164,9 @@
                         <span class="skill-tag">Figma</span>
                     </div>
                 </div>
-                <div class="skill-category glass-card">
-                    <div class="category-header">
-                        <i class="fas fa-video"></i>
-                        <h3>Creative Tools</h3>
-                    </div>
+
+                <div class="skill-panel" data-reveal data-delay="400">
+                    <h3 class="skill-cat-title">Creative Tools</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">CapCut</span>
                         <span class="skill-tag">Blender 3D</span>
@@ -264,323 +179,263 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- ── PROJECTS ────────────────────────────────────────── -->
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title">
-                <span class="title-bracket">{</span>
-                Projects
-                <span class="title-bracket">}</span>
-            </h2>
+            <span class="section-label" data-reveal>&gt; PROJECTS</span>
+
             <div class="projects-grid">
-                <div class="project-card glass-card">
-                    <div class="project-icon">
-                        <i class="fas fa-music"></i>
+
+                <div class="project-panel" data-reveal>
+                    <span class="cm cm-tl"></span><span class="cm cm-tr"></span>
+                    <span class="cm cm-bl"></span><span class="cm cm-br"></span>
+                    <span class="project-id">PRJ-001</span>
+                    <h3 class="project-title">FPGA Sound Synth</h3>
+                    <p class="project-desc">Fully digital synthesizer on FPGA PL and PS, inspired by Korg Minilogue XD. Built with MATLAB, Simulink, and Vivado.</p>
+                    <div class="project-tags">
+                        <span class="tag">VERILOG</span><span class="tag">VIVADO</span><span class="tag">MATLAB</span><span class="tag">SIMULINK</span>
                     </div>
-                    <h3>FPGA Sound Synth</h3>
-                    <p>A fully digital synthesizer using FPGA PL and PS, inspired by Korg Minilogue XD. Built with
-                        MATLAB, Simulink, and Vivado.</p>
-                    <div class="project-tech">
-                        <span>Verilog</span>
-                        <span>Vivado</span>
-                        <span>MATLAB</span>
-                        <span>Simulink</span>
-                    </div>
-                    <div class="project-links-container">
-                        <a href="https://github.com/drik245/FPGASoundSynth" class="project-link" target="_blank">
-                            <i class="fab fa-github"></i>
-                            <span>View Code</span>
-                        </a>
-                        <a href="https://drik245.github.io/FPGASoundSynth/" class="project-link demo-link"
-                            target="_blank">
-                            <i class="fas fa-play-circle"></i>
-                            <span>Live Demo</span>
-                        </a>
+                    <div class="project-links">
+                        <a href="https://github.com/drik245/FPGASoundSynth" target="_blank">↗ GITHUB</a>
+                        <a href="https://drik245.github.io/FPGASoundSynth/" target="_blank">↗ DEMO</a>
                     </div>
                 </div>
 
-                <div class="project-card glass-card">
-                    <div class="project-icon">
-                        <i class="fas fa-seedling"></i>
+                <div class="project-panel" data-reveal data-delay="80">
+                    <span class="cm cm-tl"></span><span class="cm cm-tr"></span>
+                    <span class="cm cm-bl"></span><span class="cm cm-br"></span>
+                    <span class="project-id">PRJ-002</span>
+                    <h3 class="project-title">AgroSmart</h3>
+                    <p class="project-desc">Automatic crop irrigation and health monitoring using ESP32 and various sensors for precision agriculture.</p>
+                    <div class="project-tags">
+                        <span class="tag">ESP32</span><span class="tag">C++</span><span class="tag">SENSORS</span><span class="tag">IOT</span>
                     </div>
-                    <h3>AgroSmart</h3>
-                    <p>Automatic crop irrigation and health monitoring system using ESP32 and various sensors for
-                        precision agriculture.</p>
-                    <div class="project-tech">
-                        <span>ESP32</span>
-                        <span>C++</span>
-                        <span>Sensors</span>
-                        <span>IoT</span>
+                    <div class="project-links">
+                        <a href="https://github.com/drik245/Verdant_SIH" target="_blank">↗ GITHUB</a>
                     </div>
-                    <a href="https://github.com/drik245/Verdant_SIH" class="project-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span>View Code</span>
-                    </a>
                 </div>
 
-                <div class="project-card glass-card">
-                    <div class="project-icon">
-                        <i class="fas fa-lock"></i>
+                <div class="project-panel" data-reveal data-delay="160">
+                    <span class="cm cm-tl"></span><span class="cm cm-tr"></span>
+                    <span class="cm cm-bl"></span><span class="cm cm-br"></span>
+                    <span class="project-id">PRJ-003</span>
+                    <h3 class="project-title">BLE Encryption Device</h3>
+                    <p class="project-desc">FIDO2 protocol implementation using BLE with user presence verification for secure authentication.</p>
+                    <div class="project-tags">
+                        <span class="tag">BLE</span><span class="tag">EMBEDDED C</span><span class="tag">FIDO2</span><span class="tag">SECURITY</span>
                     </div>
-                    <h3>BLE Encryption Device</h3>
-                    <p>FIDO2 protocol implementation using BLE with user presence verification for secure
-                        authentication.</p>
-                    <div class="project-tech">
-                        <span>BLE</span>
-                        <span>Embedded C</span>
-                        <span>FIDO2</span>
-                        <span>Security</span>
+                    <div class="project-links">
+                        <a href="https://github.com/drik245" target="_blank">↗ GITHUB</a>
                     </div>
-                    <a href="https://github.com/drik245" class="project-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span>View Code</span>
-                    </a>
                 </div>
 
-                <div class="project-card glass-card">
-                    <div class="project-icon">
-                        <i class="fas fa-headphones"></i>
+                <div class="project-panel" data-reveal data-delay="240">
+                    <span class="cm cm-tl"></span><span class="cm cm-tr"></span>
+                    <span class="cm cm-bl"></span><span class="cm cm-br"></span>
+                    <span class="project-id">PRJ-004</span>
+                    <h3 class="project-title">ESP32 Spatial Audio</h3>
+                    <p class="project-desc">3D spatial audio processing and rendering on ESP32 platform with real-time DSP algorithms.</p>
+                    <div class="project-tags">
+                        <span class="tag">ESP32</span><span class="tag">C++</span><span class="tag">DSP</span><span class="tag">AUDIO</span>
                     </div>
-                    <h3>ESP32 Spatial Audio</h3>
-                    <p>3D spatial audio processing and rendering on ESP32 platform with DSP algorithms.</p>
-                    <div class="project-tech">
-                        <span>ESP32</span>
-                        <span>C++</span>
-                        <span>DSP</span>
-                        <span>Audio</span>
+                    <div class="project-links">
+                        <a href="https://github.com/drik245/ESP32_Spatial_Audio" target="_blank">↗ GITHUB</a>
                     </div>
-                    <a href="https://github.com/drik245/ESP32_Spatial_Audio" class="project-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span>View Code</span>
-                    </a>
                 </div>
 
-                <div class="project-card glass-card">
-                    <div class="project-icon">
-                        <i class="fas fa-th"></i>
+                <div class="project-panel" data-reveal data-delay="320">
+                    <span class="cm cm-tl"></span><span class="cm cm-tr"></span>
+                    <span class="cm cm-bl"></span><span class="cm cm-br"></span>
+                    <span class="project-id">PRJ-005</span>
+                    <h3 class="project-title">Matrix Display Driver</h3>
+                    <p class="project-desc">MicroPython library for driving 8x8 LED matrix displays with easy-to-use API.</p>
+                    <div class="project-tags">
+                        <span class="tag">MICROPYTHON</span><span class="tag">LED MATRIX</span><span class="tag">EMBEDDED</span>
                     </div>
-                    <h3>Matrix Display Driver</h3>
-                    <p>MicroPython library for driving 8x8 LED matrix displays with easy-to-use API.</p>
-                    <div class="project-tech">
-                        <span>MicroPython</span>
-                        <span>LED Matrix</span>
-                        <span>Embedded</span>
+                    <div class="project-links">
+                        <a href="https://github.com/drik245/matrix_display_driver" target="_blank">↗ GITHUB</a>
                     </div>
-                    <a href="https://github.com/drik245/matrix_display_driver" class="project-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span>View Code</span>
-                    </a>
                 </div>
 
-                <div class="project-card glass-card">
-                    <div class="project-icon">
-                        <i class="fas fa-bolt"></i>
+                <div class="project-panel" data-reveal data-delay="400">
+                    <span class="cm cm-tl"></span><span class="cm cm-tr"></span>
+                    <span class="cm cm-bl"></span><span class="cm cm-br"></span>
+                    <span class="project-id">PRJ-006</span>
+                    <h3 class="project-title">V4K Shrike</h3>
+                    <p class="project-desc">Collection of ready-to-use IoT projects and references for the Shrike-Lite/ShrikeFi platform.</p>
+                    <div class="project-tags">
+                        <span class="tag">C++</span><span class="tag">MICROPYTHON</span><span class="tag">RP2040</span><span class="tag">IOT</span>
                     </div>
-                    <h3>V4K Shrike</h3>
-                    <p>Collection of ready-to-use IoT projects and references for the Shrike-Lite/ShrikeFi platform.</p>
-                    <div class="project-tech">
-                        <span>C++</span>
-                        <span>MicroPython</span>
-                        <span>RP2040</span>
-                        <span>IoT</span>
-                        <span>ESP32</span>
-                        <span>Shrike</span>
+                    <div class="project-links">
+                        <a href="https://github.com/drik245/v4k_shrike" target="_blank">↗ GITHUB</a>
                     </div>
-                    <a href="https://github.com/drik245/v4k_shrike" class="project-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span>View Code</span>
-                    </a>
                 </div>
 
-                <div class="project-card glass-card">
-                    <div class="project-icon">
-                        <i class="fas fa-car"></i>
+                <div class="project-panel" data-reveal data-delay="480">
+                    <span class="cm cm-tl"></span><span class="cm cm-tr"></span>
+                    <span class="cm cm-bl"></span><span class="cm cm-br"></span>
+                    <span class="project-id">PRJ-007</span>
+                    <h3 class="project-title">LPC1768 CAN Driver</h3>
+                    <p class="project-desc">Well-documented CAN bus driver implementation for the NXP LPC1768 microcontroller.</p>
+                    <div class="project-tags">
+                        <span class="tag">C</span><span class="tag">CAN BUS</span><span class="tag">LPC1768</span><span class="tag">EMBEDDED</span>
                     </div>
-                    <h3>LPC1768 CAN Driver</h3>
-                    <p>Well-documented CAN bus driver implementation for the NXP LPC1768 microcontroller.</p>
-                    <div class="project-tech">
-                        <span>C</span>
-                        <span>CAN Bus</span>
-                        <span>LPC1768</span>
-                        <span>Embedded</span>
+                    <div class="project-links">
+                        <a href="https://github.com/drik245/LPC1768-CAN-Driver" target="_blank">↗ GITHUB</a>
                     </div>
-                    <a href="https://github.com/drik245/LPC1768-CAN-Driver" class="project-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span>View Code</span>
-                    </a>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="section">
+    <!-- ── TIMELINE (Experience + Education) ───────────────── -->
+    <section id="timeline" class="section">
         <div class="container">
-            <h2 class="section-title">
-                <span class="title-bracket">{</span>
-                Experience
-                <span class="title-bracket">}</span>
-            </h2>
-            <div class="timeline">
-                <!-- <div class="timeline-item glass-card">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-date">2024 - 2028</div>
-                    <h3>B.Tech ECE</h3>
-                    <h4>Bennett University, Greater Noida</h4>
-                    <p>Electronics & Communication Engineering with focus on embedded systems and FPGA design.</p>
-                </div> -->
-                <div class="timeline-item glass-card">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-date">Jan 2026 - Present</div>
-                    <h3>Vice-President</h3>
-                    <h4>Resonance (Electronics Student Club), Bennett University</h4>
-                    <p>Overseeing club operations, strategy, and driving technical and outreach initiatives.</p>
-                </div>
-                <div class="timeline-item glass-card">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-date">2024 - Dec 2025</div>
-                    <h3>Technical Head</h3>
-                    <h4>Resonance (Electronics Student Club), Bennett University</h4>
-                    <p>Led technical initiatives, organized workshops, hackathons, and conducted outreach programs.</p>
-                </div>
-                <div class="timeline-item glass-card">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-date">Dec 2024 - Apr 2025</div>
-                    <h3>Customer Service Delight</h3>
-                    <h4>Dose Inc.</h4>
-                    <p>Delivered customer service excellence, resolving queries and improving service workflows.</p>
-                </div>
-                <div class="timeline-item glass-card">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-date">2025</div>
-                    <h3>SIH 2025 Finalist</h3>
-                    <h4>Smart India Hackathon</h4>
-                    <p>Ranked 14 out of 600 teams in internal rounds with AgroSmart project.</p>
-                </div>
-                <div class="timeline-item glass-card">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-date">2025</div>
-                    <h3>E-Summit Participant</h3>
-                    <h4>IIT Roorkee</h4>
-                    <p>Participated in premier entrepreneurship summit and networking events.</p>
-                </div>
-                <div class="timeline-item glass-card">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-date">2025</div>
-                    <h3>Outreach Program</h3>
-                    <h4>Resonance (Electronics Student Club), Bennett University</h4>
-                    <p>Organized outreach programs to help the underprivileged and spread awareness about technology.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Education Section -->
-    <section id="education" class="section">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-bracket">{</span>
-                Education
-                <span class="title-bracket">}</span>
-            </h2>
-            <div class="timeline">
-                <div class="timeline-item glass-card">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-date">2024 - 2028</div>
-                    <h3>B.Tech ECE [CGPA: 7.75]</h3>
-                    <h4>Bennett University, Greater Noida</h4>
-                    <p>Electronics & Communication Engineering with focus on embedded systems and IoT.</p>
-                </div>
-                <div class="timeline-item glass-card">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-date">2023 - 2024</div>
-                    <h3>12th Standard - 75%</h3>
-                    <h4>St. Francis School, Indirapuram</h4>
-                    <p>Physics, Chemistry, Mathematics, English, Physical Education</p>
-                </div>
-                <div class="timeline-item glass-card">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-date">2021 - 2022</div>
-                    <h3>10th Standard - 94%</h3>
-                    <h4>St. Francis School, Indirapuram</h4>
-                    <p>Excellent academic performance in foundational studies.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <!-- Experience -->
+            <span class="section-label" data-reveal>&gt; STATUS: ACTIVE</span>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-bracket">{</span>
-                Get In Touch
-                <span class="title-bracket">}</span>
-            </h2>
-            <div class="contact-content">
-                <div class="contact-info glass-card">
-                    <h3>Let's Connect</h3>
-                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your
-                        vision.</p>
-                    <div class="contact-links">
-                        <a href="mailto:drik@tuta.io" class="contact-link">
-                            <i class="fas fa-envelope"></i>
-                            <span>drik@tuta.io</span>
-                        </a>
-                        <a href="https://github.com/drik245" class="contact-link" target="_blank">
-                            <i class="fab fa-github"></i>
-                            <span>github.com/drik245</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/drikpaul202/" class="contact-link" target="_blank">
-                            <i class="fab fa-linkedin"></i>
-                            <span>linkedin.com/in/drikpaul202</span>
-                        </a>
-                        <div class="contact-link">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Ghaziabad, UP, India</span>
-                        </div>
+            <div class="circuit-timeline">
+                <div class="circuit-line"></div>
+
+                <div class="tl-entry" data-reveal>
+                    <div class="tl-node"></div>
+                    <div class="tl-body">
+                        <span class="tl-date">JAN 2026 – PRESENT</span>
+                        <h3>Vice-President</h3>
+                        <p>Resonance (Electronics Student Club), Bennett University — overseeing club operations, strategy, and driving technical and outreach initiatives.</p>
                     </div>
                 </div>
-                <!-- <div class="contact-cta glass-card">
-                    <div class="cta-icon">
-                        <i class="fas fa-paper-plane"></i>
+
+                <div class="tl-entry" data-reveal data-delay="80">
+                    <div class="tl-node"></div>
+                    <div class="tl-body">
+                        <span class="tl-date">2024 – DEC 2025</span>
+                        <h3>Technical Head</h3>
+                        <p>Resonance, Bennett University — led technical initiatives, organized workshops, hackathons, and outreach programs.</p>
                     </div>
-                    <h3>Ready to collaborate?</h3>
-                    <p>Drop me an email and let's build something amazing together!</p>
-                    <a href="mailto:drik@tuta.io" class="btn btn-primary">
-                        <span>Send Email</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div> -->
+                </div>
+
+                <div class="tl-entry" data-reveal data-delay="160">
+                    <div class="tl-node"></div>
+                    <div class="tl-body">
+                        <span class="tl-date">DEC 2024 – APR 2025</span>
+                        <h3>Customer Service Delight</h3>
+                        <p>Dose Inc. — delivered customer service excellence, resolving queries and improving service workflows.</p>
+                    </div>
+                </div>
+
+                <div class="tl-entry" data-reveal data-delay="240">
+                    <div class="tl-node"></div>
+                    <div class="tl-body">
+                        <span class="tl-date">2025</span>
+                        <h3>SIH 2025 Finalist</h3>
+                        <p>Smart India Hackathon — ranked 14 out of 600 teams in internal rounds with AgroSmart project.</p>
+                    </div>
+                </div>
+
+                <div class="tl-entry" data-reveal data-delay="320">
+                    <div class="tl-node"></div>
+                    <div class="tl-body">
+                        <span class="tl-date">2025</span>
+                        <h3>E-Summit Participant</h3>
+                        <p>IIT Roorkee — participated in premier entrepreneurship summit and networking events.</p>
+                    </div>
+                </div>
+
+                <div class="tl-entry" data-reveal data-delay="400">
+                    <div class="tl-node"></div>
+                    <div class="tl-body">
+                        <span class="tl-date">2025</span>
+                        <h3>Outreach Program</h3>
+                        <p>Resonance, Bennett University — organized outreach programs for the underprivileged and technology awareness.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <span class="section-label" data-reveal style="margin-top:80px">&gt; EDUCATION</span>
+
+            <div class="circuit-timeline">
+                <div class="circuit-line"></div>
+
+                <div class="tl-entry" data-reveal>
+                    <div class="tl-node"></div>
+                    <div class="tl-body">
+                        <span class="tl-date">2024 – 2028</span>
+                        <h3>B.Tech ECE — CGPA: 7.75</h3>
+                        <p>Bennett University, Greater Noida — Electronics & Communication Engineering with focus on embedded systems and IoT.</p>
+                    </div>
+                </div>
+
+                <div class="tl-entry" data-reveal data-delay="80">
+                    <div class="tl-node"></div>
+                    <div class="tl-body">
+                        <span class="tl-date">2023 – 2024</span>
+                        <h3>12th Standard — 75%</h3>
+                        <p>St. Francis School, Indirapuram — Physics, Chemistry, Mathematics, English, Physical Education.</p>
+                    </div>
+                </div>
+
+                <div class="tl-entry" data-reveal data-delay="160">
+                    <div class="tl-node"></div>
+                    <div class="tl-body">
+                        <span class="tl-date">2021 – 2022</span>
+                        <h3>10th Standard — 94%</h3>
+                        <p>St. Francis School, Indirapuram — excellent academic performance in foundational studies.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── CONTACT ─────────────────────────────────────────── -->
+    <section id="contact" class="section section-contact">
+        <div class="container">
+            <span class="section-label" data-reveal>&gt; CONTACT</span>
+
+            <div class="contact-center" data-reveal>
+                <a href="mailto:drik@tuta.io" class="contact-link">drik@tuta.io</a>
+                <a href="https://github.com/drik245" target="_blank" class="contact-link">github.com/drik245</a>
+                <a href="https://www.linkedin.com/in/drikpaul202/" target="_blank" class="contact-link">linkedin.com/in/drikpaul202</a>
+                <span class="contact-link contact-static">Ghaziabad, UP, India</span>
+            </div>
+
+            <div class="live-clock" data-reveal data-delay="200">
+                <span class="clock-label">LOCAL TIME</span>
+                <span class="clock-value" id="clockValue">--:--:-- IST</span>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer glass-nav">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="logo-bracket">&lt;</span>
-                    <span class="logo-text">Drik Paul</span>
-                    <span class="logo-bracket">/&gt;</span>
-                </div>
-                <p class="footer-tagline">"Engineering the future, one circuit at a time."</p>
-                <div class="footer-social">
-                    <a href="mailto:drik@tuta.io" class="social-link"><i class="fas fa-envelope"></i></a>
-                    <a href="https://github.com/drik245" class="social-link" target="_blank"><i
-                            class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/drikpaul" class="social-link" target="_blank"><i
-                            class="fab fa-linkedin"></i></a>
-                </div>
-                <p class="footer-copyright">© 2024 Drik Paul. All rights reserved.</p>
-            </div>
-        </div>
+    <!-- ── FOOTER ──────────────────────────────────────────── -->
+    <footer class="site-footer">
+        <span>&copy; 2024 Drik Paul</span>
+        <span class="footer-dot">·</span>
+        <span>Signal Deck</span>
     </footer>
+
+    <!-- ── EASTER EGG TERMINAL ─────────────────────────────── -->
+    <div class="terminal-overlay" id="terminalOverlay">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span>signal-deck-os v1.0.0</span>
+                <span class="terminal-close" id="terminalClose" title="Close">[X]</span>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-output" id="terminalOutput">
+                    <span style="color: var(--muted)">Welcome to Signal Deck OS. Type 'help' to see available commands.</span><br>
+                </div>
+                <div class="terminal-input-line">
+                    <span class="prompt-char" style="color: var(--accent); margin-right: 8px;">guest@signal-deck:~$</span>
+                    <input type="text" class="terminal-input" id="terminalInput" autocomplete="off" spellcheck="false" aria-label="Terminal Input">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
-
 </html>
