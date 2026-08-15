@@ -136,27 +136,27 @@ const RAW_ENTRIES = [
    BATCH DETECTION
    ================================================================ */
 /**
- * Given a roll number string, determine:
- *   - stream: 'ECE' | 'EEC' | 'unknown'
- *   - batch:  'B1' | 'B2'
- *   - eceBatch: 'B1' | 'B2' (ECE internal batch for lab splits)
+ * Given a roll number string, determine stream, lab batch, and ECE batch.
  *
- * Roll number format: E24ECEU0012  or  E24EECU0005
- *   - ECEU → ECE student
- *   - EECU → EEC student
+ * Roll number format: E24ECEU0012 (ECE) or E24EECU0005 (EEC)
  *
- * Batch definitions (from PDF legend):
- *   EEC B1: E24ECEU0001–0035  (includes both ECE and EEC because they share labs)
- *   EEC B2: E24EECU0001–0024 + E24ECEU0036–0043
- *   ECE B1: E24ECEU0001–0023
- *   ECE B2: E24ECEU0024–0043
+ * Lab Batch (for shared lab scheduling):
+ *   B1 : E24ECEU0001–0035
+ *   B2 : E24ECEU0036–0043  AND  all E24EECU*
+ *
+ * ECE Internal Batch (for ECE-only lab splits):
+ *   ECE B1 : E24ECEU0001–0023
+ *   ECE B2 : E24ECEU0024–0043
+ *
+ * EEC students have no sub-batch — they are always in Lab B2.
  */
-function detectStudentInfo(rollNo, branchChoice) {
+function detectStudentInfo(rollNo) {
   const normalized = rollNo.toUpperCase().trim();
 
-  // Determine stream from roll number prefix OR branch radio choice
-  let stream = branchChoice; // fallback to user choice
+  let stream = 'unknown';
   let rollNum = 0;
+  let batch = 'B1';    // lab batch
+  let eceBatch = 'B1'; // ECE internal batch
 
   const eceMatch = normalized.match(/E24ECEU(\d+)/);
   const eecMatch = normalized.match(/E24EECU(\d+)/);
@@ -164,29 +164,15 @@ function detectStudentInfo(rollNo, branchChoice) {
   if (eceMatch) {
     stream = 'ECE';
     rollNum = parseInt(eceMatch[1], 10);
+    // Lab batch: 0001-0035 → B1, 0036-0043 → B2
+    batch   = (rollNum >= 1 && rollNum <= 35) ? 'B1' : 'B2';
+    // ECE internal batch: 0001-0023 → B1, 0024-0043 → B2
+    eceBatch = (rollNum >= 1 && rollNum <= 23) ? 'B1' : 'B2';
   } else if (eecMatch) {
     stream = 'EEC';
     rollNum = parseInt(eecMatch[1], 10);
-  }
-
-  let batch = 'B1';
-  let eceBatch = 'B1';
-
-  if (stream === 'ECE') {
-    // ECE B1: 0001–0023
-    // ECE B2: 0024–0043
-    eceBatch = (rollNum >= 1 && rollNum <= 23) ? 'B1' : 'B2';
-    // EEC lab batch: ECE 0001–0035 → EEC B1, ECE 0036–0043 → EEC B2
-    batch = (rollNum >= 1 && rollNum <= 35) ? 'B1' : 'B2';
-  } else if (stream === 'EEC') {
-    // EEC B1: 0001–0024
-    // EEC B2: rest (0025+)
-    batch = (rollNum >= 1 && rollNum <= 24) ? 'B1' : 'B2';
-    eceBatch = batch; // EEC students share same batch designation
-  } else {
-    // Can't parse — use B1 as default
-    batch = 'B1';
-    eceBatch = 'B1';
+    batch    = 'B2'; // All EEC students are in lab B2
+    eceBatch = 'B2'; // Not applicable, but set for consistency
   }
 
   return { stream, batch, eceBatch, rollNum };
@@ -387,8 +373,8 @@ function renderCourseSummary(student) {
    ================================================================ */
 function getBatchLabel(student) {
   const { stream, batch, eceBatch } = student;
-  if (stream === 'ECE') return `ECE ${eceBatch} / Lab ${batch}`;
-  if (stream === 'EEC') return `EEC ${batch}`;
+  if (stream === 'ECE') return `ECE ${eceBatch} · Lab ${batch}`;
+  if (stream === 'EEC') return `Lab B2`;
   return `Batch ${batch}`;
 }
 
@@ -409,11 +395,11 @@ function setError(id, msg) {
 }
 
 function clearErrors() {
-  ['name-error', 'roll-error', 'branch-error', 'spec-error'].forEach(id => setError(id, ''));
+  ['name-error', 'roll-error', 'spec-error'].forEach(id => setError(id, ''));
   document.querySelectorAll('.form-input').forEach(i => i.classList.remove('error'));
 }
 
-function validateForm(name, roll, branch, spec) {
+function validateForm(name, roll, spec) {
   let valid = true;
 
   if (!name.trim()) {
@@ -426,11 +412,13 @@ function validateForm(name, roll, branch, spec) {
     setError('roll-error', 'Please enter your roll number.');
     document.getElementById('roll-no').classList.add('error');
     valid = false;
-  }
-
-  if (!branch) {
-    setError('branch-error', 'Please select your branch (ECE or EEC).');
-    valid = false;
+  } else {
+    const normalized = roll.toUpperCase().trim();
+    if (!normalized.match(/E24ECEU\d+/) && !normalized.match(/E24EECU\d+/)) {
+      setError('roll-error', 'Unrecognized roll number. Use format E24ECEU0012 or E24EECU0005.');
+      document.getElementById('roll-no').classList.add('error');
+      valid = false;
+    }
   }
 
   if (!spec) {
@@ -502,14 +490,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const name = document.getElementById('student-name').value;
     const roll = document.getElementById('roll-no').value;
-    const branchRadio = document.querySelector('input[name="branch"]:checked');
     const specRadio = document.querySelector('input[name="specialization"]:checked');
-    const branch = branchRadio ? branchRadio.value : '';
     const spec = specRadio ? specRadio.value : '';
 
-    if (!validateForm(name, roll, branch, spec)) return;
+    if (!validateForm(name, roll, spec)) return;
 
-    const info = detectStudentInfo(roll, branch);
+    const info = detectStudentInfo(roll);
     const student = {
       name: name.trim(),
       roll: roll.trim(),
