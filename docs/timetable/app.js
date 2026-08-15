@@ -78,7 +78,7 @@ const RAW_ENTRIES = [
   // 0820-0920 & 0925-1025: EECE220L (EEC) in 303-B-LA + EECE201L (ECE B1) in 304-B-LA — LAB (two consecutive slots)
   { slot: 0, day: 2, code: 'EECE220L', name: 'Cyber Security', teacher: 'Dr. Priyanka', room: '303-B-LA', type: 'EEC', tag: 'Lab', batch: 'all' },
   { slot: 0, day: 2, code: 'EECE201L', name: 'Solid State Devices', teacher: 'Dr. Ashish', room: '304-B-LA', type: 'ECE', tag: 'Lab', batch: 'B1' },
-  { slot: 1, day: 2, code: 'EECE220L', name: 'Cyber Security', teacher: 'Dr. Priyanka', room: '303-B-LA', type: 'EEC', tag: 'Lab', batch: 'B1' },
+  { slot: 1, day: 2, code: 'EECE220L', name: 'Cyber Security', teacher: 'Dr. Priyanka', room: '303-B-LA', type: 'EEC', tag: 'Lab', batch: 'all' },
   { slot: 1, day: 2, code: 'EECE201L', name: 'Solid State Devices', teacher: 'Dr. Ashish', room: '304-B-LA', type: 'ECE', tag: 'Lab', batch: 'B1' },
   // 1030-1130: Specializations
   { slot: 2, day: 2, code: 'EECE366L', name: 'Intro to Data Analytics', teacher: 'Dr. Umesh', room: '109-N-TR', type: 'spec', spec: 'DataAnalysis', batch: 'all' },
@@ -104,8 +104,9 @@ const RAW_ENTRIES = [
   // 1030-1130: Specializations
   { slot: 2, day: 3, code: 'EECE366L', name: 'Intro to Data Analytics', teacher: 'Dr. Umesh', room: '109-N-TR', type: 'spec', spec: 'DataAnalysis', batch: 'all' },
   { slot: 2, day: 3, code: 'EEC3041L', name: 'VLSI Technology', teacher: 'Dr. Mahesh', room: '304-B-LA', type: 'spec', spec: 'VLSI', batch: 'all' },
-  // 1135-1235: EECE311L — Lecture (CA room, single slot)
-  { slot: 3, day: 3, code: 'EECE311L', name: 'Analog & Digital Communications', teacher: 'Prof. Usman', room: '009-N-CA', type: 'common', batch: 'all' },
+  // 1135-1235: EECE311L + EECE201L — ECE only (no class for EEC at this slot)
+  { slot: 3, day: 3, code: 'EECE311L', name: 'Analog & Digital Communications', teacher: 'Prof. Usman', room: '009-N-CA', type: 'ECE', batch: 'all' },
+  { slot: 3, day: 3, code: 'EECE201L', name: 'Solid State Devices', teacher: 'Dr. Ashish', room: '009-N-CA', type: 'ECE', batch: 'all' },
   // 1240-1340: LUNCH
   { slot: 4, day: 3, code: '', name: 'LUNCH', teacher: '', room: '', type: 'lunch', batch: 'all' },
   // 1345-1445: EHSS301L Project Management NCB-106
