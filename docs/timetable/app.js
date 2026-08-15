@@ -417,10 +417,27 @@ function validateForm(name, roll, spec) {
     valid = false;
   } else {
     const normalized = roll.toUpperCase().trim();
-    if (!normalized.match(/E24ECEU\d+/) && !normalized.match(/E24EECU\d+/)) {
+    const eceMatch = normalized.match(/E24ECEU(\d+)/);
+    const eecMatch = normalized.match(/E24EECU(\d+)/);
+
+    if (!eceMatch && !eecMatch) {
       setError('roll-error', 'Unrecognized roll number. Use format E24ECEU0012 or E24EECU0005.');
       document.getElementById('roll-no').classList.add('error');
       valid = false;
+    } else if (eceMatch) {
+      const num = parseInt(eceMatch[1], 10);
+      if (num < 1 || num > 43) {
+        setError('roll-error', 'ECE roll number must be between E24ECEU0001 and E24ECEU0043.');
+        document.getElementById('roll-no').classList.add('error');
+        valid = false;
+      }
+    } else if (eecMatch) {
+      const num = parseInt(eecMatch[1], 10);
+      if (num < 1 || num > 24) {
+        setError('roll-error', 'EEC roll number must be between E24EECU0001 and E24EECU0024.');
+        document.getElementById('roll-no').classList.add('error');
+        valid = false;
+      }
     }
   }
 
