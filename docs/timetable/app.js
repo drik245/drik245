@@ -182,7 +182,7 @@ function detectStudentInfo(rollNo) {
    FILTER: which entries apply to this student?
    ================================================================ */
 function filterEntries(entries, student) {
-  const { stream, batch, spec } = student;
+  const { stream, batch, eceBatch, spec } = student;
 
   return entries.filter(entry => {
     // Lunch always shows
@@ -199,8 +199,11 @@ function filterEntries(entries, student) {
     if (entry.type === 'EEC' && stream !== 'EEC') return false;
 
     // Batch check
+    // ECE-type entries use ECE internal batch (B1=0001-0023, B2=0024-0043)
+    // All other entries use Lab batch (B1=0001-0035, B2=0036-0043+EEC)
     if (entry.batch !== 'all') {
-      if (entry.batch !== batch) return false;
+      const studentBatch = (entry.type === 'ECE') ? eceBatch : batch;
+      if (entry.batch !== studentBatch) return false;
     }
 
     return true;
