@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Timetable | ECE & EEC Department</title>
+  <meta name="description" content="Personalized V-semester timetable generator for ECE and EEC students. Enter your name and roll number to get your custom timetable." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Animated background blobs -->
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- LANDING / FORM SCREEN -->
+  <section id="landing-screen" class="screen active">
+    <div class="landing-container">
+      <div class="logo-badge">
+        <span class="badge-icon">📅</span>
+        <span>ECE / EEC Department</span>
+      </div>
+      <h1 class="hero-title">
+        Your<br />
+        <span class="gradient-text">Timetable</span>
+      </h1>
+      <p class="hero-subtitle">
+        Enter your details below and get a timetable curated specifically for <em>you</em> — based on your branch, batch, and specialization.
+      </p>
+
+      <form id="student-form" class="form-card" novalidate>
+        <!-- Name -->
+        <div class="form-group">
+          <label for="student-name" class="form-label">Full Name</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input
+              id="student-name"
+              type="text"
+              class="form-input"
+              placeholder="e.g. Aditya Kumar"
+              autocomplete="name"
+              required
+            />
+          </div>
+          <span class="field-error" id="name-error"></span>
+        </div>
+
+        <!-- Roll No -->
+        <div class="form-group">
+          <label for="roll-no" class="form-label">Roll Number</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🎓</span>
+            <input
+              id="roll-no"
+              type="text"
+              class="form-input"
+              placeholder="e.g. E24ECEU0012"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <span class="field-error" id="roll-error"></span>
+        </div>
+
+        <!-- Branch -->
+        <div class="form-group">
+          <label class="form-label">Branch</label>
+          <div class="radio-group" role="radiogroup" aria-label="Branch selection">
+            <label class="radio-card" id="branch-ece-label">
+              <input type="radio" name="branch" value="ECE" id="branch-ece" required />
+              <div class="radio-card-inner">
+                <span class="radio-icon">⚡</span>
+                <div>
+                  <span class="radio-title">ECE</span>
+                  <span class="radio-desc">Electronics &amp; Communication Engineering</span>
+                </div>
+                <span class="radio-check">✓</span>
+              </div>
+            </label>
+            <label class="radio-card" id="branch-eec-label">
+              <input type="radio" name="branch" value="EEC" id="branch-eec" required />
+              <div class="radio-card-inner">
+                <span class="radio-icon">💻</span>
+                <div>
+                  <span class="radio-title">EEC</span>
+                  <span class="radio-desc">Electronics Engineering &amp; Computing</span>
+                </div>
+                <span class="radio-check">✓</span>
+              </div>
+            </label>
+          </div>
+          <span class="field-error" id="branch-error"></span>
+        </div>
+
+        <!-- Specialization -->
+        <div class="form-group">
+          <label class="form-label">Specialization</label>
+          <div class="spec-grid" role="radiogroup" aria-label="Specialization selection">
+            <label class="spec-card" id="spec-vlsi-label">
+              <input type="radio" name="specialization" value="VLSI" id="spec-vlsi" required />
+              <div class="spec-card-inner">
+                <div class="spec-glow glow-purple"></div>
+                <span class="spec-icon">💎</span>
+                <span class="spec-title">VLSI</span>
+                <span class="spec-sub">EEC3041L<br />VLSI Technology</span>
+              </div>
+            </label>
+            <label class="spec-card" id="spec-data-label">
+              <input type="radio" name="specialization" value="DataAnalysis" id="spec-data" required />
+              <div class="spec-card-inner">
+                <div class="spec-glow glow-cyan"></div>
+                <span class="spec-icon">📊</span>
+                <span class="spec-title">Data Analysis</span>
+                <span class="spec-sub">EECE366L<br />Intro to Data Analytics</span>
+              </div>
+            </label>
+            <label class="spec-card" id="spec-embedded-label">
+              <input type="radio" name="specialization" value="Embedded" id="spec-embedded" required />
+              <div class="spec-card-inner">
+                <div class="spec-glow glow-orange"></div>
+                <span class="spec-icon">🔧</span>
+                <span class="spec-title">Embedded Systems</span>
+                <span class="spec-sub">EECE460L<br />HW-SW Co-Design</span>
+              </div>
+            </label>
+            <label class="spec-card" id="spec-none-label">
+              <input type="radio" name="specialization" value="None" id="spec-none" required />
+              <div class="spec-card-inner">
+                <div class="spec-glow glow-gray"></div>
+                <span class="spec-icon">📋</span>
+                <span class="spec-title">No Specialization</span>
+                <span class="spec-sub">Show only common &amp; branch courses</span>
+              </div>
+            </label>
+          </div>
+          <span class="field-error" id="spec-error"></span>
+        </div>
+
+        <button type="submit" class="btn-generate" id="generate-btn">
+          <span class="btn-text">Generate My Timetable</span>
+          <span class="btn-icon">→</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- TIMETABLE SCREEN -->
+  <section id="timetable-screen" class="screen">
+    <div class="tt-header">
+      <button id="back-btn" class="back-btn" aria-label="Go back">
+        ← Back
+      </button>
+      <div class="tt-header-info">
+        <div class="tt-student-badge">
+          <span class="tt-student-name" id="tt-name-display"></span>
+          <span class="tt-roll-badge" id="tt-roll-display"></span>
+          <span class="tt-branch-badge" id="tt-branch-display"></span>
+          <span class="tt-batch-badge" id="tt-batch-display"></span>
+        </div>
+        <p class="tt-spec-info" id="tt-spec-display"></p>
+      </div>
+      <button class="print-btn" onclick="window.print()" aria-label="Print timetable">
+        🖨️ Print
+      </button>
+    </div>
+
+    <div class="tt-container">
+      <div class="tt-title-block">
+        <h2>V-Semester Timetable</h2>
+        <p class="tt-academic-year">Academic Year 2026–27 (Odd Semester)</p>
+      </div>
+
+      <!-- Legend -->
+      <div class="tt-legend" role="list" aria-label="Legend">
+        <div class="legend-item" role="listitem"><span class="legend-dot dot-common"></span>Common</div>
+        <div class="legend-item" role="listitem"><span class="legend-dot dot-branch"></span>Branch-Specific</div>
+        <div class="legend-item" role="listitem"><span class="legend-dot dot-spec"></span>Specialization</div>
+        <div class="legend-item" role="listitem"><span class="legend-dot dot-lab"></span>Lab</div>
+        <div class="legend-item" role="listitem"><span class="legend-dot dot-lunch"></span>Lunch Break</div>
+      </div>
+
+      <!-- Timetable Grid -->
+      <div class="tt-scroll-wrapper">
+        <table class="tt-table" id="tt-table" role="table" aria-label="Weekly timetable">
+          <thead>
+            <tr>
+              <th class="tt-th timing-col">Timing</th>
+              <th class="tt-th">Monday</th>
+              <th class="tt-th">Tuesday</th>
+              <th class="tt-th">Wednesday</th>
+              <th class="tt-th">Thursday</th>
+              <th class="tt-th">Friday</th>
+            </tr>
+          </thead>
+          <tbody id="tt-body">
+            <!-- JS fills this -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Courses List -->
+      <div class="courses-section">
+        <h3 class="courses-heading">Your Courses This Semester</h3>
+        <div class="courses-grid" id="courses-grid">
+          <!-- JS fills this -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
