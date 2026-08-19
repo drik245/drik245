@@ -128,8 +128,7 @@ const RAW_ENTRIES = [
   { slot: 4, day: 4, code: '', name: 'LUNCH', teacher: '', room: '', type: 'lunch', batch: 'all' },
   // 1345-1445: EECE210L Probability
   { slot: 5, day: 4, code: 'EECE210L', name: 'Probability Theory & Stochastic Processes', teacher: 'Dr. Rohan', room: '009-N-CA', type: 'common', batch: 'all' },
-  // 1450-1550: EECE311L Analog — CA|L
-  { slot: 6, day: 4, code: 'EECE311L', name: 'Analog & Digital Communications', teacher: 'Prof. Usman', room: '009-N-CA', type: 'common', tag: 'Lab', batch: 'all' },
+  // 1450-1550: (no class)
 ];
 
 /* ================================================================
